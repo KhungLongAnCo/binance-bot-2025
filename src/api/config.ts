@@ -1,6 +1,7 @@
 import crypto from "crypto";
 
 import dotenv from "dotenv";
+import { CONFIG } from "../config/config";
 
 dotenv.config();
 
@@ -9,7 +10,7 @@ export const BINANCE_SECRET_KEY = process.env.BINANCE_SECRET_KEY!;
 export const BINANCE_BASE_URL = process.env.BINANCE_BASE_URL!;
 
 const defaultParams = {
-  symbol: "BTCUSDT",
+  symbol: CONFIG.MAIN_PAIR,
   side: "BUY",
   type: "MARKET",
   quantity: 0.01,

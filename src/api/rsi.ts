@@ -1,4 +1,5 @@
 import axios from "axios";
+import { CONFIG } from "../config/config";
 
 export let currentRsi: number;
 export let currentTrend = "UNKNOWN";
@@ -70,14 +71,14 @@ export const checkTrend = async (symbol: string): Promise<string> => {
 
 // Cập nhật RSI mỗi 1 phút
 setInterval(() => {
-  getRSI("BTCUSDT", "15m");
+  getRSI(CONFIG.MAIN_PAIR, "15m");
 }, 60 * 1000);
 
 // Cập nhật RSI mỗi 100 phút
 
 setInterval(async () => {
-  currentTrend = await checkTrend("BTCUSDT");
+  currentTrend = await checkTrend(CONFIG.MAIN_PAIR);
 }, 6000 * 1000);
 
-getRSI("BTCUSDT", "15m");
-checkTrend("BTCUSDT");
+getRSI(CONFIG.MAIN_PAIR, "15m");
+checkTrend(CONFIG.MAIN_PAIR);

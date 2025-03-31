@@ -6,6 +6,7 @@ import {
   placeOrder,
 } from "../api/order";
 import { currentRsi, currentTrend, getRSI } from "../api/rsi";
+import { CONFIG } from "../config/config";
 
 /*
 
@@ -32,7 +33,7 @@ export const init = () => {
 };
 
 export const exec = async (
-  symbol: string = "BTCUSDT",
+  symbol: string = CONFIG.MAIN_PAIR,
   currentPrice: number
 ) => {
   try {
@@ -96,7 +97,10 @@ export const exec = async (
       }
 
       // Đóng vị thế nếu lợi nhuận đạt 20% hoặc lỗ 20%
-      if (profitPercentage >= 20 || profitPercentage <= -20) {
+      if (
+        profitPercentage >= CONFIG.TAKE_PROFIT ||
+        profitPercentage <= CONFIG.STOP_LOSS
+      ) {
         console.log(
           `Closing position ${symbol} due to profit/loss condition...`
         );
